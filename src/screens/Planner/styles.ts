@@ -5,9 +5,7 @@ const styles = StyleSheet.create({
     padding: 24,
     marginTop: 20,
   },
-  text: {
-    width: 300,
-  },
+  text: {},
 });
 
 export default styles;

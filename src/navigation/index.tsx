@@ -6,15 +6,18 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Home';
 import PlannerScreen from '../screens/Planner';
+import WorkoutPreview from '../screens/WorkoutPreview';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => (
-  <Stack.Navigator
-    initialRouteName='Home'
-    screenOptions={{ headerShown: false }}
-  >
-    <Stack.Screen name='Root' component={AppBottomTabNavigator} />
+  <Stack.Navigator initialRouteName='Home'>
+    <Stack.Screen
+      name='Root'
+      component={AppBottomTabNavigator}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen name='WorkoutPreview' component={WorkoutPreview} />
   </Stack.Navigator>
 );
 
