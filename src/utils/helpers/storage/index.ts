@@ -39,3 +39,11 @@ export const checkData = async (key: string) => {
     console.log(e);
   }
 };
+
+export const clearDataStored = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (e) {
+    console.log(e);
+  }
+};

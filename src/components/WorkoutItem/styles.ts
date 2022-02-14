@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
   },
   duration: { fontSize: 15 },
   difficulty: { fontSize: 15 },
+  childrenContainer: {
+    marginVertical: 10,
+  },
 });
 
 export default styles;

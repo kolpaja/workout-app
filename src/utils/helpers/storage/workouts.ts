@@ -1,4 +1,4 @@
-import { getData, checkData, storeData } from './index';
+import { getData, checkData, storeData, removeData } from './index';
 import data from '../../data/data.json';
 import { Workout } from '../../data/types';
 
@@ -13,6 +13,16 @@ export const initWorkouts = async (): Promise<boolean> => {
 
 export const getWorkouts = async (): Promise<Workout[]> => {
   const workouts = await getData('workout-data');
-  console.log(workouts);
+  // console.log(workouts);
   return workouts;
+};
+
+export const getWorkoutBySlug = async (slug: string): Promise<Workout> => {
+  const workouts = await getData('workout-data');
+  const workout = workouts.find((workout: Workout) => workout.slug === slug);
+  return workout;
+};
+
+export const clearWorkouts = async (): Promise<void> => {
+  await removeData('workout-data');
 };
