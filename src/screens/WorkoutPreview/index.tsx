@@ -14,19 +14,32 @@ const WorkoutPreview = ({ route }: WorkoutPreviewProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [trackerIdx, setTrackerIdx] = useState<number>(-1);
 
-  const countDown = useCountDown(
-    trackerIdx,
-    trackerIdx >= 0 ? sequence[trackerIdx].duration : -1
-  );
+  const { countDown, isRunning, stop, start } = useCountDown(trackerIdx);
+
+  useEffect(() => {
+    if (!workout) {
+      return;
+    }
+    if (trackerIdx === workout.sequence.length - 1) {
+      return;
+    }
+    if (countDown === 0) {
+      addItemToSequence(trackerIdx + 1);
+    }
+  }, [countDown]);
 
   const slug = route.params.slug;
   const workout = useSingleWorkout({ slug });
 
   const addItemToSequence = (index: number) => {
-    setSequence([...sequence, workout!.sequence[index]]);
+    const newSequence = [...sequence, workout!.sequence[index]];
+    setSequence(newSequence);
     setTrackerIdx(index);
+    start(newSequence[index].duration);
   };
-  //the ! says that there will be for sure a workout item
+
+  const hasReachedEnd =
+    sequence.length === workout?.sequence.length && countDown === 0;
 
   if (!workout) {
     return <Text>Loading...</Text>;
@@ -39,14 +52,46 @@ const WorkoutPreview = ({ route }: WorkoutPreviewProps) => {
           </Pressable>
         </WorkoutItem>
 
-        <View>
-          {sequence.length === 0 && (
+        <View style={styles.centerView}>
+          {sequence.length === 0 ? (
             <FontAwesome
               onPress={() => addItemToSequence(0)}
               name='play-circle-o'
               size={100}
             />
+          ) : isRunning ? (
+            <FontAwesome
+              onPress={() => stop()}
+              name='stop-circle-o'
+              size={100}
+            />
+          ) : (
+            <FontAwesome
+              onPress={() => {
+                if (hasReachedEnd) {
+                  console.log('restart the exercise');
+                }
+                start(countDown);
+              }}
+              name='play-circle-o'
+              size={100}
+            />
           )}
+          {sequence.length > 0 && countDown >= 0 && (
+            <View>
+              <Text style={styles.countDown}>{countDown}</Text>
+            </View>
+          )}
+        </View>
+
+        <View>
+          <Text>
+            {sequence.length === 0
+              ? 'Prepare'
+              : hasReachedEnd
+              ? 'Good Job!'
+              : sequence[trackerIdx].name}
+          </Text>
         </View>
 
         <Modal visible={isModalVisible}>

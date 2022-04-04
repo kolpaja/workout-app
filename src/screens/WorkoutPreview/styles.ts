@@ -29,6 +29,15 @@ const styles = StyleSheet.create({
   sequenceText: {
     fontSize: 16,
   },
+  centerView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  countDown: {
+    fontSize: 42,
+  },
   icon: {
     alignItems: 'center',
     paddingVertical: 10,

@@ -7,7 +7,7 @@ import styles from './styles';
 
 const HomeScreen = ({ navigation }: NativeStackHeaderProps) => {
   const workouts = useWorkouts();
-
+  console.log('workouts', workouts);
   const PressableItem = ({ item }: { item: Workout }) => (
     <Pressable
       onPress={() => navigation.navigate('WorkoutPreview', { slug: item.slug })}
