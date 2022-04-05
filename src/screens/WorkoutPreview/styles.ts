@@ -50,6 +50,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     alignSelf: 'center',
   },
+  wrapper: {
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    backgroundColor: '#fff',
+  },
 });
 
 export default styles;
