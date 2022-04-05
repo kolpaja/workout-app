@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   sequenceText: {
     fontSize: 16,
   },
-  centerView: {
+  counterUI: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -41,6 +41,14 @@ const styles = StyleSheet.create({
   icon: {
     alignItems: 'center',
     paddingVertical: 10,
+  },
+  counterItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  infoText: {
+    fontSize: 24,
+    alignSelf: 'center',
   },
 });
 

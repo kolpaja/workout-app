@@ -16,6 +16,24 @@ const WorkoutPreview = ({ route }: WorkoutPreviewProps) => {
 
   const { countDown, isRunning, stop, start } = useCountDown(trackerIdx);
 
+  const slug = route.params.slug;
+  const workout = useSingleWorkout({ slug });
+
+  const addItemToSequence = (index: number) => {
+    let newSequence = [];
+    if (index > 0) {
+      newSequence = [...sequence, workout!.sequence[index]];
+    } else {
+      newSequence = [workout!.sequence[index]];
+    }
+    setSequence(newSequence);
+    setTrackerIdx(index);
+    start(newSequence[index].duration);
+  };
+
+  const hasReachedEnd =
+    sequence.length === workout?.sequence.length && countDown === 0;
+
   useEffect(() => {
     if (!workout) {
       return;
@@ -28,19 +46,6 @@ const WorkoutPreview = ({ route }: WorkoutPreviewProps) => {
     }
   }, [countDown]);
 
-  const slug = route.params.slug;
-  const workout = useSingleWorkout({ slug });
-
-  const addItemToSequence = (index: number) => {
-    const newSequence = [...sequence, workout!.sequence[index]];
-    setSequence(newSequence);
-    setTrackerIdx(index);
-    start(newSequence[index].duration);
-  };
-
-  const hasReachedEnd =
-    sequence.length === workout?.sequence.length && countDown === 0;
-
   if (!workout) {
     return <Text>Loading...</Text>;
   } else
@@ -52,40 +57,43 @@ const WorkoutPreview = ({ route }: WorkoutPreviewProps) => {
           </Pressable>
         </WorkoutItem>
 
-        <View style={styles.centerView}>
-          {sequence.length === 0 ? (
-            <FontAwesome
-              onPress={() => addItemToSequence(0)}
-              name='play-circle-o'
-              size={100}
-            />
-          ) : isRunning ? (
-            <FontAwesome
-              onPress={() => stop()}
-              name='stop-circle-o'
-              size={100}
-            />
-          ) : (
-            <FontAwesome
-              onPress={() => {
-                if (hasReachedEnd) {
-                  console.log('restart the exercise');
-                }
-                start(countDown);
-              }}
-              name='play-circle-o'
-              size={100}
-            />
-          )}
+        <View style={styles.counterUI}>
+          <View style={styles.counterItem}>
+            {sequence.length === 0 ? (
+              <FontAwesome
+                onPress={() => addItemToSequence(0)}
+                name='play-circle-o'
+                size={100}
+              />
+            ) : isRunning ? (
+              <FontAwesome
+                onPress={() => stop()}
+                name='stop-circle-o'
+                size={100}
+              />
+            ) : (
+              <FontAwesome
+                onPress={() => {
+                  if (hasReachedEnd) {
+                    addItemToSequence(0);
+                  } else {
+                    start(countDown);
+                  }
+                }}
+                name='play-circle-o'
+                size={100}
+              />
+            )}
+          </View>
           {sequence.length > 0 && countDown >= 0 && (
-            <View>
+            <View style={styles.counterItem}>
               <Text style={styles.countDown}>{countDown}</Text>
             </View>
           )}
         </View>
 
         <View>
-          <Text>
+          <Text style={styles.infoText}>
             {sequence.length === 0
               ? 'Prepare'
               : hasReachedEnd
