@@ -13,7 +13,6 @@ export const initWorkouts = async (): Promise<boolean> => {
 
 export const getWorkouts = async (): Promise<Workout[]> => {
   const workouts = await getData('workout-data');
-  // console.log(workouts);
   return workouts;
 };
 

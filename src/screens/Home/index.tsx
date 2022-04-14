@@ -7,7 +7,6 @@ import styles from './styles';
 
 const HomeScreen = ({ navigation }: NativeStackHeaderProps) => {
   const workouts = useWorkouts();
-  console.log('workouts', workouts);
   const PressableItem = ({ item }: { item: Workout }) => (
     <Pressable
       onPress={() => navigation.navigate('WorkoutPreview', { slug: item.slug })}
@@ -18,7 +17,7 @@ const HomeScreen = ({ navigation }: NativeStackHeaderProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>New Workouts</Text>
+      <Text style={styles.title}>Workouts</Text>
 
       <FlatList
         data={workouts}
