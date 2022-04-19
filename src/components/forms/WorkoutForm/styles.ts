@@ -3,9 +3,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    width: 240,
+    height: 150,
     borderRadius: 10,
-    padding: 15,
-    flexDirection: 'column',
+    padding: 20,
   },
   title: {
     fontSize: 18,
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     margin: 5,
-    flex: 1,
   },
   label: {},
   input: {

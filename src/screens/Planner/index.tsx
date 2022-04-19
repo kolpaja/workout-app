@@ -7,13 +7,13 @@ import ExerciseForm from '../../components/forms/ExerciseForm';
 import { ExerciseType, Workout, WorkoutSequence } from '../../utils/data/types';
 import ExerciseItem from '../../components/ExerciseItem';
 import { Modal } from '../../components/Modal';
-import { PressableText } from '../../components/styled/PressableText';
 import WorkoutForm from '../../components/forms/WorkoutForm';
 import { ExerciseFormTypes } from '../../components/forms/ExerciseForm/types';
 import { WorkoutFormData } from '../../components/forms/WorkoutForm/types';
 import { addNewWorkout } from '../../utils/helpers/storage/workouts';
 
 import styles from './styles';
+import PressableThemeText from '../../components/styled/PressableThemeText';
 
 const computeDifficulty = (exerciseCount: number, duration: number) => {
   const intensity = duration / exerciseCount;
@@ -78,27 +78,29 @@ const PlannerScreen = ({ navigation }: NativeStackHeaderProps) => {
         )}
       />
       <ExerciseForm onSubmit={handleCreateExercise} />
-      <Modal
-        activator={({ handleOpen }) => (
-          <PressableText
-            style={{ marginTop: 10 }}
-            text='Add Workout'
-            onPressIn={handleOpen}
-          />
-        )}
-      >
-        {({ handleClose }) => (
-          <View>
-            <WorkoutForm
-              onSubmit={async (data) => {
-                await handleCreateWorkout(data);
-                handleClose();
-                navigation.navigate('Home');
-              }}
+      <View>
+        <Modal
+          activator={({ handleOpen }) => (
+            <PressableThemeText
+              style={{ marginTop: 10 }}
+              text='Add Workout'
+              onPressIn={handleOpen}
             />
-          </View>
-        )}
-      </Modal>
+          )}
+        >
+          {({ handleClose }) => (
+            <View>
+              <WorkoutForm
+                onSubmit={async (data) => {
+                  await handleCreateWorkout(data);
+                  handleClose();
+                  navigation.navigate('Home');
+                }}
+              />
+            </View>
+          )}
+        </Modal>
+      </View>
     </View>
   );
 };

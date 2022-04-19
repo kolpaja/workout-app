@@ -30,7 +30,11 @@ export function Modal({ activator: Activator, children }: ModalProps) {
           <View style={styles.contentView}>
             {children({ handleOpen, handleClose })}
           </View>
-          <PressableText onPress={handleClose} text='Close' />
+          <PressableText
+            onPress={handleClose}
+            text='X Close'
+            style={{ backgroundColor: 'white', color: 'black' }}
+          />
         </View>
       </DefaultModal>
       {Activator ? (

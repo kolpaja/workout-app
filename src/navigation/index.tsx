@@ -1,7 +1,12 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { ColorSchemeName } from 'react-native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Home';
@@ -25,7 +30,7 @@ const BottomTab = createBottomTabNavigator();
 
 const AppBottomTabNavigator = () => (
   <BottomTab.Navigator
-    screenOptions={{ headerShown: false }}
+    screenOptions={{ headerShown: true }}
     initialRouteName='Home'
   >
     <BottomTab.Screen
@@ -50,9 +55,15 @@ const AppBottomTabNavigator = () => (
   </BottomTab.Navigator>
 );
 
-export default function Navigation() {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={colorScheme === 'light' ? DefaultTheme : DarkTheme}
+    >
       <AppNavigator />
     </NavigationContainer>
   );

@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#d6d7da',
     marginBottom: 10,
+    marginHorizontal: 10,
     padding: 10,
     backgroundColor: '#fff',
   },
@@ -17,6 +18,9 @@ const styles = StyleSheet.create({
   difficulty: { fontSize: 15 },
   childrenContainer: {
     marginVertical: 10,
+  },
+  deleteBtn: {
+    alignSelf: 'flex-end',
   },
 });
 

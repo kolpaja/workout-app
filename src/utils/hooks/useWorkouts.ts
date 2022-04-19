@@ -12,7 +12,7 @@ const useWorkouts = () => {
       setWorkouts(_workouts);
     }
     loadData();
-  }, []);
+  }, [workouts]);
   return workouts;
 };
 
