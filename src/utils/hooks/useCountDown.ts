@@ -28,7 +28,7 @@ export default function useCountDown(idx: number, initialCount: number = -1) {
         setCountDown((count) => {
           return count - 1;
         });
-      }, 10);
+      }, 1000);
     }
 
     return cleanUp;

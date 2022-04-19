@@ -8,7 +8,7 @@ export interface WorkoutSequence {
   duration: number;
 }
 
-export type Difficulty = 'easy' | 'medium' | 'hard';
+export type Difficulty = 'easy' | 'normal' | 'hard';
 
 export interface Workout {
   slug: string;

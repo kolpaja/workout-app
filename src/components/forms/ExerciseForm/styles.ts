@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#1890ff',
     padding: 5,
     borderRadius: 5,
-    width: 80,
-    marginVertical: 2,
+    width: '45%',
+    marginVertical: 5,
     zIndex: 1,
   },
   buttonText: {

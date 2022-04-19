@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { Workout } from '../../utils/data/types';
@@ -7,6 +8,7 @@ import styles from './styles';
 
 const HomeScreen = ({ navigation }: NativeStackHeaderProps) => {
   const workouts = useWorkouts();
+
   const PressableItem = ({ item }: { item: Workout }) => (
     <Pressable
       onPress={() => navigation.navigate('WorkoutPreview', { slug: item.slug })}
@@ -14,6 +16,8 @@ const HomeScreen = ({ navigation }: NativeStackHeaderProps) => {
       <WorkoutItem item={item} />
     </Pressable>
   );
+
+  useEffect(() => {}, [workouts]);
 
   return (
     <View style={styles.container}>

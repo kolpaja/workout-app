@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, Text, TextInput, Pressable } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
-import Select from '../Select';
-import { WorkoutFormTypes, WorkoutFormProps } from './types';
+import Select from '../../Select';
+import { ExerciseFormProps, ExerciseFormTypes } from './types';
 import styles from './styles';
-import { ExerciseType } from '../../utils/data/types';
+import { ExerciseType } from '../../../utils/data/types';
 
 const options = ['Stretch', 'Break', 'Cardio'];
 
-const ExerciseForm = ({ onSubmit }: WorkoutFormProps) => {
+const ExerciseForm = ({ onSubmit }: ExerciseFormProps) => {
   const {
     control,
     handleSubmit,
@@ -141,9 +141,9 @@ const ExerciseForm = ({ onSubmit }: WorkoutFormProps) => {
 
       <Pressable
         style={styles.button}
-        onPress={handleSubmit((data) => onSubmit(data as WorkoutFormTypes))}
+        onPressIn={handleSubmit((data) => onSubmit(data as ExerciseFormTypes))}
       >
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>Add Exercise</Text>
       </Pressable>
     </View>
   );
